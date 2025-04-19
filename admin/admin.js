@@ -4,12 +4,15 @@ const sesEl = document.getElementById("ses");
 const dersEl = document.getElementById("ders");
 const zorlukEl = document.getElementById("zorluk");
 const sonucEl = document.getElementById("sonuc");
+const listeAlani = document.getElementById("listeAlani");
 const form = document.getElementById("wordForm");
 
-// Kayıtlı veriyi al
+// Verileri al
 let veri = JSON.parse(localStorage.getItem("kurdolingo_dersler") || "[]");
 
-// Form gönderildiğinde çalışacak
+// Listeyi yükle
+guncelleListe();
+
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -17,10 +20,8 @@ form.addEventListener("submit", function (e) {
   const anlam = anlamEl.value.trim();
   const ders = dersEl.value.trim();
   const zorluk = zorlukEl.value;
-
   const dosya = sesEl.files[0];
 
-  // Kontroller
   if (!kelime || !anlam || !ders || !zorluk) {
     sonucEl.textContent = "Lütfen tüm alanları doldurun.";
     return;
@@ -35,7 +36,6 @@ form.addEventListener("submit", function (e) {
   reader.onload = function () {
     const sesBase64 = reader.result;
 
-    // Yeni veri
     const yeni = {
       ders,
       kelime,
@@ -44,19 +44,51 @@ form.addEventListener("submit", function (e) {
       zorluk
     };
 
-    // LocalStorage'a ekle
     veri.push(yeni);
     localStorage.setItem("kurdolingo_dersler", JSON.stringify(veri));
 
-    // Başarılı mesaj
     sonucEl.textContent = "✅ Kelime başarıyla kaydedildi!";
-
-    // Formu temizle
     kelimeEl.value = "";
     anlamEl.value = "";
     sesEl.value = "";
+    dersEl.value = "";
     zorlukEl.selectedIndex = 0;
+
+    guncelleListe();
   };
 
   reader.readAsDataURL(dosya);
 });
+
+// Listeleme fonksiyonu
+function guncelleListe() {
+  listeAlani.innerHTML = "";
+
+  if (veri.length === 0) {
+    listeAlani.innerHTML = "<p>Henüz kelime eklenmedi.</p>";
+    return;
+  }
+
+  veri.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.style.border = "1px solid #ccc";
+    div.style.padding = "10px";
+    div.style.marginBottom = "10px";
+    div.style.borderRadius = "8px";
+    div.innerHTML = `
+      <strong>${item.kelime}</strong> – ${item.anlam}<br/>
+      <em>Ders:</em> ${item.ders} | <em>Zorluk:</em> ${item.zorluk}
+      <br/><button onclick="silKelime(${index})" style="margin-top:5px;">🗑️ Sil</button>
+    `;
+    listeAlani.appendChild(div);
+  });
+}
+
+// Silme fonksiyonu
+function silKelime(index) {
+  if (confirm("Bu kelimeyi silmek istiyor musunuz?")) {
+    veri.splice(index, 1);
+    localStorage.setItem("kurdolingo_dersler", JSON.stringify(veri));
+    guncelleListe();
+  }
+}
