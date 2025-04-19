@@ -1,3 +1,9 @@
+if (words.length === 0) {
+  alert("Bu derste içerik bulunamadı.");
+  window.location.href = "dersler.html";
+  return;
+}
+
 // Admin panelden gelen verileri al
 const allWords = JSON.parse(localStorage.getItem("kurdolingo_dersler") || "[]");
 
