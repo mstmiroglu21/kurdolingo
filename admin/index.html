@@ -1,32 +1,30 @@
 <!DOCTYPE html>
-<html lang="ku">
+<html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Paneli - Kurdolingo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kurdolingo Admin Paneli</title>
   <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
   <div class="container">
-    <h2>Kurdolingo Admin Paneli</h2>
-
+    <h2>Kurdolingo – Admin Panel</h2>
     <form id="wordForm">
+      <input type="text" id="kelime" placeholder="Kürtçe Kelime" required />
+      <input type="text" id="anlam" placeholder="Türkçe Anlamı" required />
+      <input type="file" id="ses" accept="audio/*" required />
       <input type="text" id="ders" placeholder="Ders Adı (örn: Selamlaşma)" required />
-      <input type="text" id="kelime" placeholder="Kelime (örn: Slav)" required />
-      <input type="text" id="anlam" placeholder="Anlamı (örn: Merhaba)" required />
-      <label>Ses Dosyası (.mp3):</label>
-      <input type="file" id="ses" accept=".mp3" required />
-      <button type="submit">Ekle</button>
+
       <select id="zorluk" required>
         <option value="" disabled selected>Zorluk Seç</option>
         <option value="kolay">Kolay</option>
         <option value="orta">Orta</option>
         <option value="zor">Zor</option>
       </select>
-      
-    </form>
 
-    <div id="sonuc"></div>
+      <button type="submit">📥 Kaydet</button>
+      <p id="sonuc"></p>
+    </form>
   </div>
 
   <script src="admin.js"></script>
