@@ -1,16 +1,15 @@
+const xp = parseInt(localStorage.getItem("kurdolingo_xp") || "0");
+const streak = parseInt(localStorage.getItem("kurdolingo_streak") || "0");
+const lastDay = localStorage.getItem("kurdolingo_last_day") || "";
+const kelimeler = JSON.parse(localStorage.getItem("kurdolingo_dersler") || "[]");
+
+const seviyeAdi = document.getElementById("seviyeAdi");
+const rozetImg = document.getElementById("rozetImg");
 const xpBar = document.getElementById("xpBar");
-const xpValue = document.getElementById("xpValue");
-const streak = document.getElementById("streak");
-const girisBtn = document.getElementById("girisXP");
-const levelEl = document.getElementById("level");
-const rozetResim = document.getElementById("rozetResim");
-
-const dailyTarget = 30;
-let xp = parseInt(localStorage.getItem("kurdolingo_xp") || "0");
-let lastDay = localStorage.getItem("kurdolingo_last_day");
-let currentStreak = parseInt(localStorage.getItem("kurdolingo_streak") || "0");
-
-const today = new Date().toLocaleDateString();
+const xpMiktari = document.getElementById("xpMiktari");
+const streakEl = document.getElementById("streak");
+const dersSayisi = document.getElementById("dersSayisi");
+const quizSayisi = document.getElementById("quizSayisi");
 
 function hesaplaSeviye(xp) {
   if (xp < 50) return { seviye: "Başlangıç", rozet: "rozet1.png" };
@@ -18,37 +17,18 @@ function hesaplaSeviye(xp) {
   return { seviye: "İleri Seviye", rozet: "rozet3.png" };
 }
 
-function updateProgress() {
-  xpValue.textContent = xp;
-  let percent = Math.min((xp / dailyTarget) * 100, 100);
-  xpBar.style.width = `${percent}%`;
-  streak.textContent = currentStreak;
+function guncelle() {
+  const sev = hesaplaSeviye(xp);
+  seviyeAdi.textContent = `Seviye: ${sev.seviye}`;
+  rozetImg.src = `assets/images/${sev.rozet}`;
 
-  const sonuc = hesaplaSeviye(xp);
-  levelEl.textContent = sonuc.seviye;
-  rozetResim.src = `assets/images/${sonuc.rozet}`;
-  rozetResim.style.display = "block";
+  let percent = Math.min((xp % 50) * 2, 100);
+  xpBar.style.width = percent + "%";
+  xpMiktari.textContent = `XP: ${xp}`;
+
+  streakEl.textContent = streak;
+  dersSayisi.textContent = new Set(kelimeler.map(w => w.ders)).size;
+  quizSayisi.textContent = kelimeler.length;
 }
 
-function updateStreak() {
-  if (lastDay !== today) {
-    const yesterday = new Date(Date.now() - 86400000).toLocaleDateString();
-    if (lastDay === yesterday) {
-      currentStreak++;
-    } else {
-      currentStreak = 1;
-    }
-    localStorage.setItem("kurdolingo_streak", currentStreak);
-    localStorage.setItem("kurdolingo_last_day", today);
-  }
-}
-
-girisBtn.addEventListener("click", () => {
-  xp += 10;
-  if (xp > dailyTarget) xp = dailyTarget;
-  localStorage.setItem("kurdolingo_xp", xp.toString());
-  updateProgress();
-});
-
-updateStreak();
-updateProgress();
+guncelle();
