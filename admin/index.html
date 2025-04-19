@@ -6,7 +6,6 @@
   <title>Kurdolingo Admin Paneli</title>
   <link rel="stylesheet" href="admin.css" />
   <script>
-    // Sayfaya giriş yapılmamışsa yönlendir
     if (localStorage.getItem("kurdolingo_admin") !== "ok") {
       window.location.href = "giris.html";
     }
@@ -21,14 +20,12 @@
       <input type="text" id="anlam" placeholder="Türkçe Anlamı" required />
       <input type="file" id="ses" accept="audio/*" required />
       <input type="text" id="ders" placeholder="Ders Adı (örn: Selamlaşma)" required />
-
       <select id="zorluk" required>
         <option value="" disabled selected>Zorluk Seç</option>
         <option value="kolay">Kolay</option>
         <option value="orta">Orta</option>
         <option value="zor">Zor</option>
       </select>
-
       <button type="submit">📥 Kaydet</button>
       <p id="sonuc"></p>
     </form>
@@ -37,6 +34,12 @@
       <button onclick="exportJSON()">📥 JSON Dışa Aktar</button>
       <button onclick="exportCSV()">📊 CSV Dışa Aktar</button>
     </div>
+
+    <hr />
+    <h4>📂 Verileri Geri Yükle (.json)</h4>
+    <input type="file" id="importFile" accept=".json" />
+    <button onclick="importJSON()">İçe Aktar</button>
+    <p id="importSonuc"></p>
 
     <hr />
     <h3>Kayıtlı Kelimeler</h3>
