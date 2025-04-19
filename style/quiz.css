@@ -1,0 +1,41 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f0f0;
+    text-align: center;
+    padding: 30px;
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+  
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  #options button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .correct {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .incorrect {
+    background-color: #e53935;
+    color: white;
+  }
+  

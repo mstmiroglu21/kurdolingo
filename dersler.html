@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dersler - Kurdolingo</title>
+  <link rel="stylesheet" href="style/dersler.css" />
+</head>
+<body>
+  <header>
+    <h2>Dersler</h2>
+  </header>
+
+  <main class="lesson-container">
+    <div class="lesson-card" onclick="openLesson('giris')">
+      <img src="assets/images/start-icon.svg" alt="Giriş" />
+      <h3>Giriş</h3>
+      <p>Başlangıç dersi</p>
+    </div>
+
+    <div class="lesson-card" onclick="openLesson('selam')">
+      <img src="assets/images/hello-icon.svg" alt="Selamlaşma" />
+      <h3>Selamlaşma</h3>
+      <p>Merhaba, nasılsın?</p>
+    </div>
+
+    <div class="lesson-card" onclick="openLesson('sayilar')">
+      <img src="assets/images/numbers-icon.svg" alt="Sayılar" />
+      <h3>Sayılar</h3>
+      <p>1, 2, 3...</p>
+    </div>
+
+    <div class="filter-buttons">
+      <button onclick="filtrele('hepsi')">Tümü</button>
+      <button onclick="filtrele('kolay')">Kolay</button>
+      <button onclick="filtrele('orta')">Orta</button>
+      <button onclick="filtrele('zor')">Zor</button>
+    </div>
+    <div class="lesson-container" id="lessonContainer"></div>
+
+    
+  </main>
+
+  <script src="js/dersler.js"></script>
+</body>
+</html>

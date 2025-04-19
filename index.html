@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kurdolingo - Kürtçe Öğren</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#f9b400" />
+  <link rel="stylesheet" href="style/style.css" />
+  <meta name="description" content="Kürtçe öğrenmenin en kolay yolu. Kurdolingo ile Kürtçe dersler, quiz, telaffuz, AI sohbet!">
+  <link rel="icon" href="assets/images/kurdish-sun-logo.svg">
+
+</head>
+<body>
+  <div class="container">
+    <img src="assets/images/kurdish-sun-logo.svg" alt="Kurdolingo Logo" class="logo" />
+    <h1>Kurdolingo</h1>
+    <p>Kürtçe öğrenmenin en kolay yolu!</p>
+    <button id="startBtn">Hemen Başla</button>
+
+    <h1 data-i18n="title"></h1>
+    <p data-i18n="welcome"></p>
+    <button id="startBtn" data-i18n="start_button"></button>
+
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker kayıt edildi"))
+        .catch((err) => console.error("SW hatası:", err));
+    }
+  </script>
+
+<select onchange="changeLang(this.value)">
+  <option value="tr">Türkçe</option>
+  <option value="en">English</option>
+  <option value="ku">Kurdî</option>
+</select>
+
+<script>
+  function changeLang(lang) {
+    localStorage.setItem("kurdolingo_lang", lang);
+    location.reload();
+  }
+</script>
+
+</body>
+</html>

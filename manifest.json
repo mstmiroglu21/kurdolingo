@@ -1,0 +1,23 @@
+{
+    "name": "Kurdolingo",
+    "short_name": "Kurdolingo",
+    "description": "Kürtçe öğrenmenin en kolay yolu!",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#f9b400",
+    "theme_color": "#f9b400",
+    "orientation": "portrait",
+    "icons": [
+      {
+        "src": "assets/images/kurdolingo-icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/images/kurdolingo-icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

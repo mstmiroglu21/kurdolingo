@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  header {
+    background-color: #f9b400;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 1.5rem;
+  }
+  
+  .lesson-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .lesson-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .lesson-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .lesson-card img {
+    width: 50px;
+    margin-bottom: 10px;
+  }
+  
+  .lesson-card h3 {
+    margin: 10px 0 5px;
+    color: #f9b400;
+  }
+  
+  .lesson-card p {
+    color: #666;
+  }
+  
+  .filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px;
+  }
+  
+  .filter-buttons button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #f9b400;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
