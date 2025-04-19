@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Giriş - Kurdolingo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      margin: 15px 0;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #f9b400;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    p {
+      margin-top: 10px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Admin Girişi</h2>
+    <input type="password" id="adminPass" placeholder="Şifreyi girin" />
+    <button onclick="girisYap()">Giriş Yap</button>
+    <p id="uyari"></p>
+  </div>
+
+  <script>
+    const DOGRU_SIFRE = "kurdolingo123"; // 🔐 Şifrenizi burada değiştirin
+
+    function girisYap() {
+      const girilen = document.getElementById("adminPass").value.trim();
+      if (girilen === DOGRU_SIFRE) {
+        localStorage.setItem("kurdolingo_admin", "ok");
+        window.location.href = "index.html";
+      } else {
+        document.getElementById("uyari").textContent = "❌ Hatalı şifre!";
+      }
+    }
+  </script>
+</body>
+</html>
