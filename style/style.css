@@ -164,3 +164,47 @@
   border-radius: 10px;
   transition: width 0.5s ease-in-out;
 }
+.magaza-kutu {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.urunler {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.urun {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+}
+
+.urun .aciklama {
+  text-align: left;
+}
+
+.urun button {
+  background: #f9b400;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.urun button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
