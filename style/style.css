@@ -243,3 +243,28 @@
   background: #f9b400;
   color: white;
 }
+.telaffuz-kutu {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.kelime {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+#micBtn {
+  background-color: #f9b400;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
