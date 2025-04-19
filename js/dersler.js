@@ -1,31 +1,55 @@
-function openLesson(id) {
-    // Geçici olarak sadece sayfa yönlendirme
-    window.location.href = `ders-detay.html?ders=${id}`;
-  }
-  
-  const dersDiv = document.getElementById("lessonContainer");
-const veriler = JSON.parse(localStorage.getItem("kurdolingo_dersler") || "[]");
+const xpBar = document.getElementById("xpBar");
+const xpValue = document.getElementById("xpValue");
+const levelName = document.getElementById("levelName");
+const rozetImg = document.getElementById("rozetImg");
 
-function filtrele(zorluk) {
-  dersDiv.innerHTML = "";
+let xp = parseInt(localStorage.getItem("kurdolingo_xp") || "0");
 
-  let gosterilecek = zorluk === "hepsi"
-    ? veriler
-    : veriler.filter(v => v.zorluk === zorluk);
+function hesaplaSeviye(xp) {
+  if (xp < 50) return { seviye: "Başlangıç", rozet: "rozet1.png" };
+  if (xp < 100) return { seviye: "Orta Seviye", rozet: "rozet2.png" };
+  return { seviye: "İleri Seviye", rozet: "rozet3.png" };
+}
 
-  const dersler = [...new Set(gosterilecek.map(v => v.ders))];
+function updateXP() {
+  xpValue.textContent = `XP: ${xp}`;
+  let percent = Math.min((xp % 50) * 2, 100);
+  xpBar.style.width = percent + "%";
+
+  const sev = hesaplaSeviye(xp);
+  levelName.textContent = `Seviye: ${sev.seviye}`;
+  rozetImg.src = `assets/images/${sev.rozet}`;
+}
+
+function yukleDersler() {
+  const dersler = [
+    { ad: "Selamlaşma", ikon: "hello-icon.svg", kilitli: false },
+    { ad: "Sayılar", ikon: "numbers-icon.svg", kilitli: false },
+    { ad: "Aile", ikon: "family-icon.svg", kilitli: true },
+    { ad: "Yiyecekler", ikon: "food-icon.svg", kilitli: true }
+  ];
+
+  const container = document.getElementById("kategoriListesi");
 
   dersler.forEach(ders => {
-    const kart = document.createElement("div");
-    kart.className = "lesson-card";
-    kart.innerHTML = `
-      <img src="assets/images/start-icon.svg" />
-      <h3>${ders}</h3>
-      <p>${zorluk === "hepsi" ? "Zorluk: " + (veriler.find(v => v.ders === ders)?.zorluk || "belirsiz") : ""}</p>
+    const div = document.createElement("div");
+    div.className = "kategori";
+    if (ders.kilitli) div.classList.add("locked");
+
+    div.innerHTML = `
+      <img src="assets/images/${ders.ikon}" alt="${ders.ad}" />
+      <span>${ders.ad}</span>
     `;
-    kart.onclick = () => window.location.href = `ders-detay.html?ders=${ders}`;
-    dersDiv.appendChild(kart);
+
+    if (!ders.kilitli) {
+      div.onclick = () => {
+        window.location.href = `ders-detay.html?ders=${encodeURIComponent(ders.ad)}`;
+      };
+    }
+
+    container.appendChild(div);
   });
 }
 
-filtrele("hepsi");
+updateXP();
+yukleDersler();
