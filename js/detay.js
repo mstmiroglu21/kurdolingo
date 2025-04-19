@@ -1,57 +1,58 @@
-// Admin panelden gelen tüm verileri al
 const allWords = JSON.parse(localStorage.getItem("kurdolingo_dersler") || "[]");
-
-// URL'den ders adını al
 const urlParams = new URLSearchParams(window.location.search);
 const seciliDers = urlParams.get("ders") || "";
 
-// Seçilen derse ait kelimeleri filtrele (küçük harfe çevirerek karşılaştır)
 const words = allWords.filter(w =>
   w.ders && w.ders.trim().toLowerCase() === seciliDers.trim().toLowerCase()
 );
 
-// Eğer eşleşen kelime yoksa uyarı ver ve yönlendir
-if (words.length === 0) {
-  alert("Bu derste gösterilecek içerik bulunamadı.");
-  window.location.href = "dersler.html";
-}
-
-// DOM elemanlarını al
 const wordEl = document.getElementById("word");
 const meaningEl = document.getElementById("meaning");
 const playBtn = document.getElementById("playSound");
 const nextBtn = document.getElementById("nextBtn");
+const dersAdi = document.getElementById("dersAdi");
+const xpText = document.getElementById("xpKazanim");
 
 let index = 0;
+let xp = parseInt(localStorage.getItem("kurdolingo_xp") || "0");
 
-// Kelimeyi yükleyen fonksiyon
+dersAdi.textContent = seciliDers;
+
 function loadWord() {
   if (index >= words.length) {
     alert("🎉 Dersi tamamladınız!");
+    localStorage.setItem("kurdolingo_xp", xp.toString());
     window.location.href = "dersler.html";
     return;
   }
 
-  const kelimeObj = words[index];
-  wordEl.textContent = kelimeObj.kelime;
-  meaningEl.textContent = kelimeObj.anlam;
+  const kelime = words[index];
+  wordEl.textContent = kelime.kelime;
+  meaningEl.textContent = kelime.anlam;
 
-  // Ses oynatma
   playBtn.onclick = () => {
-    if (kelimeObj.ses && kelimeObj.ses.length > 0) {
-      const audio = new Audio(kelimeObj.ses);
+    if (kelime.ses && kelime.ses.length > 0) {
+      const audio = new Audio(kelime.ses);
       audio.play();
     } else {
-      alert("Bu kelimeye ait ses dosyası bulunamadı.");
+      alert("Ses bulunamadı.");
     }
   };
 }
 
-// “Sonraki” butonuna tıklanınca bir sonraki kelimeye geç
 nextBtn.addEventListener("click", () => {
+  xp += 10;
+  xpText.textContent = "+10 XP Kazandınız!";
+  setTimeout(() => {
+    xpText.textContent = "";
+  }, 1000);
   index++;
   loadWord();
 });
 
-// Sayfa yüklenince ilk kelimeyi getir
-loadWord();
+if (words.length === 0) {
+  alert("Bu derste içerik bulunamadı.");
+  window.location.href = "dersler.html";
+} else {
+  loadWord();
+}
