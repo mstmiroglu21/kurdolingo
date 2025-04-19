@@ -97,3 +97,39 @@
   font-size: 16px;
   cursor: pointer;
 }
+.quiz-kutu {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.secenekler {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.secenek {
+  padding: 12px;
+  background: #eee;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.secenek:hover {
+  background: #ddd;
+}
+
+.secenek.dogru {
+  background-color: #b6eeb6;
+}
+
+.secenek.yanlis {
+  background-color: #f6b6b6;
+}
