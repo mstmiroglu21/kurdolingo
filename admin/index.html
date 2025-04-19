@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kurdolingo Admin Paneli</title>
   <link rel="stylesheet" href="admin.css" />
+  <script>
+    // Sayfaya giriş yapılmamışsa yönlendir
+    if (localStorage.getItem("kurdolingo_admin") !== "ok") {
+      window.location.href = "giris.html";
+    }
+  </script>
 </head>
 <body>
   <div class="container">
@@ -27,17 +33,16 @@
       <p id="sonuc"></p>
     </form>
 
+    <div style="margin: 20px 0;">
+      <button onclick="exportJSON()">📥 JSON Dışa Aktar</button>
+      <button onclick="exportCSV()">📊 CSV Dışa Aktar</button>
+    </div>
+
     <hr />
     <h3>Kayıtlı Kelimeler</h3>
     <div id="listeAlani"></div>
   </div>
 
   <script src="admin.js"></script>
-  <script>
-     if (localStorage.getItem("kurdolingo_admin") !== "ok") {
-    window.location.href = "giris.html";
-  }
-  </script>
-
 </body>
 </html>
