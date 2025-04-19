@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="ku">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profil - Kurdolingo</title>
-  <link rel="stylesheet" href="style/profil.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kurdolingo – Profil</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>Profil & Günlük Hedef</h2>
-    <p>Bugünkü hedefin: <strong>30 XP</strong></p>
-    
-    <div class="progress-bar">
-      <div id="xpBar" class="fill"></div>
+  <div class="profil-kutu">
+    <h2>Profil</h2>
+
+    <div class="rozet-profil">
+      <img id="rozetImg" src="assets/images/rozet1.png" alt="Rozet">
     </div>
-    <p><span id="xpValue">0</span>/30 XP</p>
 
-    <p>🗓️ Günlük Seri: <span id="streak">0</span> gün</p>
-    <button id="girisXP">Bugün 10 XP Ekle</button>
+    <p id="seviyeAdi">Seviye: Başlangıç</p>
+    <div class="xp-bar-container">
+      <div class="xp-bar" id="xpBar"></div>
+    </div>
+    <p id="xpMiktari">XP: 0</p>
+
+    <hr />
+
+    <p><strong>🔥 Günlük Seri:</strong> <span id="streak">0</span> gün</p>
+    <p><strong>📚 Toplam Ders:</strong> <span id="dersSayisi">0</span></p>
+    <p><strong>🧠 Toplam Quiz:</strong> <span id="quizSayisi">0</span></p>
   </div>
-    
-    <p>Seviyeniz: <span id="level">-</span></p>
-  <div id="rozetAlani">
-    <img id="rozetResim" src="" alt="Rozet" width="100" style="display:none; margin-top: 10px;" />
-  </div>
 
-
-  <script src="js/profil.js"></script>
+  <script src="profil.js"></script>
 </body>
 </html>
