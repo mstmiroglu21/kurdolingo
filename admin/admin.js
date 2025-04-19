@@ -92,3 +92,37 @@ function silKelime(index) {
     guncelleListe();
   }
 }
+
+// JSON dışa aktar
+function exportJSON() {
+  const veriStr = JSON.stringify(veri, null, 2);
+  const blob = new Blob([veriStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "kurdolingo-kelimeler.json";
+  a.click();
+}
+
+// CSV dışa aktar
+function exportCSV() {
+  if (veri.length === 0) {
+    alert("Hiç kelime yok.");
+    return;
+  }
+
+  const basliklar = ["Kelime", "Anlam", "Ders", "Zorluk"];
+  const satirlar = veri.map(item =>
+    [item.kelime, item.anlam, item.ders, item.zorluk].map(d => `"${d}"`).join(",")
+  );
+
+  const csvStr = [basliklar.join(","), ...satirlar].join("\n");
+  const blob = new Blob([csvStr], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "kurdolingo-kelimeler.csv";
+  a.click();
+}
