@@ -62,4 +62,38 @@
       width: 90px;
     }
   }
-  
+  .ders-kutu {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.kart {
+  margin: 20px 0;
+}
+
+.kelime {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f9b400;
+}
+
+.anlam {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.btn-next {
+  padding: 10px 20px;
+  background-color: #f9b400;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
