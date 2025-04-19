@@ -133,3 +133,34 @@
 .secenek.yanlis {
   background-color: #f6b6b6;
 }
+.profil-kutu {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.rozet-profil img {
+  width: 80px;
+  height: 80px;
+  margin: 10px auto;
+}
+
+.xp-bar-container {
+  background: #eee;
+  height: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.xp-bar {
+  height: 10px;
+  width: 0%;
+  background: #f9b400;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
