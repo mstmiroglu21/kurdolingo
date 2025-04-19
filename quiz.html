@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="ku">
+<html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quiz - Kurdolingo</title>
-  <link rel="stylesheet" href="style/quiz.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kurdolingo – Quiz</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>Kelime Testi</h2>
-    <div id="questionBox" class="card">
-      <p id="question">Soru buraya gelecek</p>
-      <div id="options"></div>
-    </div>
-    <button id="nextBtn" disabled>Sonraki Soru</button>
+  <div class="quiz-kutu">
+    <h2>Test</h2>
+    <p id="soruKelime" class="kelime"></p>
+
+    <div id="secenekler" class="secenekler"></div>
+
+    <p id="cevapDurum" style="margin-top:10px;"></p>
+    <button id="sonrakiBtn" class="btn-next" disabled>➡️ Sonraki</button>
   </div>
 
-  <script src="js/quiz.js"></script>
+  <script src="quiz.js"></script>
 </body>
 </html>
