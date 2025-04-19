@@ -9,8 +9,6 @@ const form = document.getElementById("wordForm");
 
 // Verileri al
 let veri = JSON.parse(localStorage.getItem("kurdolingo_dersler") || "[]");
-
-// Listeyi yükle
 guncelleListe();
 
 form.addEventListener("submit", function (e) {
@@ -60,7 +58,6 @@ form.addEventListener("submit", function (e) {
   reader.readAsDataURL(dosya);
 });
 
-// Listeleme fonksiyonu
 function guncelleListe() {
   listeAlani.innerHTML = "";
 
@@ -84,7 +81,6 @@ function guncelleListe() {
   });
 }
 
-// Silme fonksiyonu
 function silKelime(index) {
   if (confirm("Bu kelimeyi silmek istiyor musunuz?")) {
     veri.splice(index, 1);
@@ -93,7 +89,6 @@ function silKelime(index) {
   }
 }
 
-// JSON dışa aktar
 function exportJSON() {
   const veriStr = JSON.stringify(veri, null, 2);
   const blob = new Blob([veriStr], { type: "application/json" });
@@ -105,7 +100,6 @@ function exportJSON() {
   a.click();
 }
 
-// CSV dışa aktar
 function exportCSV() {
   if (veri.length === 0) {
     alert("Hiç kelime yok.");
@@ -125,4 +119,31 @@ function exportCSV() {
   a.href = url;
   a.download = "kurdolingo-kelimeler.csv";
   a.click();
+}
+
+function importJSON() {
+  const input = document.getElementById("importFile");
+  const file = input.files[0];
+  const mesaj = document.getElementById("importSonuc");
+
+  if (!file || !file.name.endsWith(".json")) {
+    mesaj.textContent = "Lütfen geçerli bir .json dosyası seçin.";
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    try {
+      const icerik = JSON.parse(e.target.result);
+      if (!Array.isArray(icerik)) throw "Veri formatı geçersiz";
+
+      veri = [...veri, ...icerik];
+      localStorage.setItem("kurdolingo_dersler", JSON.stringify(veri));
+      mesaj.textContent = "✅ Veriler başarıyla yüklendi.";
+      guncelleListe();
+    } catch (err) {
+      mesaj.textContent = "❌ Dosya okunamadı veya biçimi hatalı.";
+    }
+  };
+  reader.readAsText(file);
 }
