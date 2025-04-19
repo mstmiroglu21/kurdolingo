@@ -33,5 +33,11 @@
   </div>
 
   <script src="admin.js"></script>
+  <script>
+  if (localStorage.getItem("kurdolingo_admin") !== "ok") {
+    window.location.href = "giris.html";
+  }
+</script>
+
 </body>
 </html>
