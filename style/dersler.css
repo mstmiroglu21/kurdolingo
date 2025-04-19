@@ -1,68 +1,83 @@
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f0f0f0;
-  }
-  
-  header {
-    background-color: #f9b400;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 1.5rem;
-  }
-  
-  .lesson-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .lesson-card {
-    background: white;
-    border-radius: 12px;
-    padding: 16px;
-    width: 90%;
-    max-width: 400px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease;
-    cursor: pointer;
-    text-align: center;
-  }
-  
-  .lesson-card:hover {
-    transform: scale(1.02);
-  }
-  
-  .lesson-card img {
-    width: 50px;
-    margin-bottom: 10px;
-  }
-  
-  .lesson-card h3 {
-    margin: 10px 0 5px;
-    color: #f9b400;
-  }
-  
-  .lesson-card p {
-    color: #666;
-  }
-  
-  .filter-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 15px;
-  }
-  
-  .filter-buttons button {
-    padding: 8px 16px;
-    border: none;
-    background-color: #f9b400;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+}
+
+.header {
+  background: #f9b400;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.level-info {
+  flex: 1;
+}
+
+.xp-bar-container {
+  background: rgba(255,255,255,0.3);
+  height: 10px;
+  border-radius: 10px;
+  margin: 8px 0;
+}
+
+.xp-bar {
+  height: 10px;
+  width: 0%;
+  background: white;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+.rozet img {
+  width: 50px;
+  height: 50px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.kategori-listesi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.kategori {
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.kategori.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.kategori:hover {
+  transform: scale(1.05);
+}
+
+.kategori img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+}
