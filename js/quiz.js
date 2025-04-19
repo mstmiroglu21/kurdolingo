@@ -1,62 +1,66 @@
-const kelimeler = JSON.parse(localStorage.getItem("kurdolingo_dersler") || "[]");
-let sorular = [...kelimeler];
-let current = 0;
+const soruKelime = document.getElementById("soruKelime");
+const seceneklerAlani = document.getElementById("secenekler");
+const cevapDurum = document.getElementById("cevapDurum");
+const sonrakiBtn = document.getElementById("sonrakiBtn");
 
-const questionEl = document.getElementById("question");
-const optionsEl = document.getElementById("options");
-const nextBtn = document.getElementById("nextBtn");
+const allWords = JSON.parse(localStorage.getItem("kurdolingo_dersler") || "[]");
+let xp = parseInt(localStorage.getItem("kurdolingo_xp") || "0");
 
-function karistir(array) {
+let mevcutSoru = null;
+
+function secenekleriKaristir(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
-function yeniSoru() {
-  nextBtn.disabled = true;
-  optionsEl.innerHTML = "";
+function soruOlustur() {
+  sonrakiBtn.disabled = true;
+  cevapDurum.textContent = "";
+  seceneklerAlani.innerHTML = "";
 
-  if (current >= sorular.length) {
-    questionEl.textContent = "Test tamamlandı!";
+  if (allWords.length < 4) {
+    alert("Test için en az 4 kelime gereklidir.");
+    window.location.href = "dersler.html";
     return;
   }
 
-  const soru = sorular[current];
-  questionEl.textContent = `"${soru.kelime}" kelimesinin anlamı nedir?`;
+  mevcutSoru = allWords[Math.floor(Math.random() * allWords.length)];
+  soruKelime.textContent = mevcutSoru.kelime;
 
-  let secenekler = [soru.anlam];
-  while (secenekler.length < 4) {
-    let rast = kelimeler[Math.floor(Math.random() * kelimeler.length)];
-    if (!secenekler.includes(rast.anlam)) {
-      secenekler.push(rast.anlam);
-    }
-  }
+  // Yanlış şıklar
+  let yanlislar = allWords.filter(w => w.anlam !== mevcutSoru.anlam);
+  yanlislar = secenekleriKaristir(yanlislar).slice(0, 3);
 
-  secenekler = karistir(secenekler);
+  // Tüm seçenekleri birleştir
+  const secenekler = secenekleriKaristir([
+    { secenek: mevcutSoru.anlam, dogru: true },
+    ...yanlislar.map(y => ({ secenek: y.anlam, dogru: false }))
+  ]);
 
-  secenekler.forEach(secenek => {
-    const btn = document.createElement("button");
-    btn.textContent = secenek;
-    btn.addEventListener("click", () => cevapla(btn, soru.anlam));
-    optionsEl.appendChild(btn);
+  secenekler.forEach(sec => {
+    const btn = document.createElement("div");
+    btn.className = "secenek";
+    btn.textContent = sec.secenek;
+    btn.onclick = () => {
+      document.querySelectorAll(".secenek").forEach(s => s.style.pointerEvents = "none");
+
+      if (sec.dogru) {
+        btn.classList.add("dogru");
+        cevapDurum.textContent = "✅ Doğru!";
+        xp += 10;
+        localStorage.setItem("kurdolingo_xp", xp.toString());
+      } else {
+        btn.classList.add("yanlis");
+        cevapDurum.textContent = "❌ Yanlış!";
+      }
+
+      sonrakiBtn.disabled = false;
+    };
+    seceneklerAlani.appendChild(btn);
   });
 }
 
-function cevapla(btn, dogruCevap) {
-  const butonlar = document.querySelectorAll("#options button");
-  butonlar.forEach(b => {
-    b.disabled = true;
-    if (b.textContent === dogruCevap) {
-      b.classList.add("correct");
-    } else if (b === btn) {
-      b.classList.add("incorrect");
-    }
-  });
-
-  nextBtn.disabled = false;
-}
-
-nextBtn.addEventListener("click", () => {
-  current++;
-  yeniSoru();
+sonrakiBtn.addEventListener("click", () => {
+  soruOlustur();
 });
 
-yeniSoru();
+soruOlustur();
